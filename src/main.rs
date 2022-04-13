@@ -2,6 +2,9 @@ use std::process::{Command, Stdio};
 use itertools::Itertools;
 
 fn main() {
+    /*TODO 
+     * allow the user to input a number as an argument (check git history) to check if it's in the vector dedup.
+     */
     let output = Command::new("wmctrl")
         .arg("-l")
         .stdout(Stdio::piped())
