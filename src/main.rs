@@ -1,15 +1,19 @@
-use std::process::*;
-use std::env;
+use std::process::{Command, Stdio};
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    let query = &args[1];
+    let output = Command::new("wmctrl")
+        .arg("-l")
+        .stdout(Stdio::piped())
+        .output()
+        .unwrap();
 
-    Command::new("zsh")
-    	.arg("-C")
-    	.arg("/home/ashwin/.config/eww/scripts/checkmatch.sh")
-        .arg(query)
-    	.spawn()
-    	.expect("sh command failed to start");
+    let stdout = String::from_utf8(output.stdout).unwrap();
+    let lines:Vec<&str> = stdout.lines().collect();
+    
+    for i in lines.iter() {
+        let split:Vec<&str> = i.split_whitespace().collect();
+        println!("{}", split[1])
+    }
+
 }
 
