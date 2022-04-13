@@ -1,9 +1,14 @@
 use std::process::*;
+use std::env;
 
 fn main() {
-    Command::new("sh")
+    let args: Vec<String> = env::args().collect();
+    let query = &args[1];
+
+    Command::new("zsh")
     	.arg("-C")
-    	.arg("/home/ashwin/Projects/scriptrunner/cringe.sh")
+    	.arg("/home/ashwin/.config/eww/scripts/checkmatch.sh")
+        .arg(query)
     	.spawn()
     	.expect("sh command failed to start");
 }
