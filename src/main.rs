@@ -3,6 +3,9 @@ use std::process::{Command, Stdio};
 use itertools::Itertools;
 
 fn main() {
+    /* TODO
+     * every time I hit my bind to open a window, this program should be run
+     */
     let args: Vec<String> = env::args().collect();
 
     let query = &args[1];
