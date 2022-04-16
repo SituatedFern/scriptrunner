@@ -1,10 +1,12 @@
+use std::env;
 use std::process::{Command, Stdio};
 use itertools::Itertools;
 
 fn main() {
-    /*TODO 
-     * allow the user to input a number as an argument (check git history) to check if it's in the vector dedup.
-     */
+    let args: Vec<String> = env::args().collect();
+
+    let query = &args[1];
+
     let output = Command::new("wmctrl")
         .arg("-l")
         .stdout(Stdio::piped())
@@ -21,6 +23,13 @@ fn main() {
         
     }
     let dedup: Vec<_> = numlist.iter().unique().collect();
-    println!{"{:?}", dedup};
-}
+    //println!{"{:?}", dedup};
 
+    if dedup.contains(&&query.as_str()) {
+        println!{"window open"}
+    }
+    
+    else {
+        println!{"no windows open"}
+    }
+}
